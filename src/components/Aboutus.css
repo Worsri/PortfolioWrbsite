@@ -1,0 +1,20 @@
+.hello{
+  text-align: center;
+}
+.name{
+  font-family: 'Courier New', Courier, monospace;
+  font-size:34px;
+  font-weight: bolder;
+  font-style: italic;
+  color:orangered;
+}
+.about{
+  font-family: 'Courier New', Courier, monospace;
+  font-size:34px;
+  font-weight: bolder;
+  font-style: italic;
+  color:darkolivegreen;
+}
+#info{
+  font-size: medium;
+}
