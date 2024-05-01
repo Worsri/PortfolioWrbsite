@@ -1,8 +1,11 @@
+// eslint-disable-next-line
+
 import React from "react";
 import Navbar from "./Navbar";
 import imagin from "./images/bgimage.avif";
 import img4 from "./images/callimage.png";
-
+import { Button } from "react-bootstrap";
+  
 function Contact() {
   return (
     <div
@@ -96,12 +99,8 @@ function Contact() {
             </form>
 
             <div className="text-center text-md-left">
-              <a
-                className="btn btn-primary"
-                onclick="document.getElementById('contact-form').submit();"
-              >
-                Send
-              </a>
+            <Button variant="outline-primary">Submit</Button>{' '}
+
             </div>
             <div className="status"></div>
           </div>
