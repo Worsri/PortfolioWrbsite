@@ -1,12 +1,49 @@
 // eslint-disable-next-line
-
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./Navbar";
 import imagin from "./images/bgimage.avif";
 import img4 from "./images/callimage.png";
 import { Button } from "react-bootstrap";
-  
+import emailjs from "@emailjs/browser";
+
 function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  // handle input change
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // handle submit
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "portfolio-fe",
+        "auto-reply-template",
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }
+      )
+      .then(() => {
+        alert("Email sent successfully!");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Failed to send email");
+      });
+  };
+
   return (
     <div
       style={{
@@ -17,107 +54,92 @@ function Contact() {
     >
       <Navbar />
 
-      <section className="mb-4 m-4 bg-image w-400">
-        <h2 className="h1-responsive font-weight-bold text-center my-4">
-          Contact us
-        </h2>
+      <section className="mb-4 m-4">
+        <h2 className="text-center my-4">Contact us</h2>
 
-        <p className="text-center w-responsive mx-auto mb-5">
-          Do you have any questions? Please do not hesitate to contact us
-          directly. Our team will come back to you within a matter of hours to
-          help you.
+        <p className="text-center mb-5">
+          Do you have any questions? Please contact us directly.
         </p>
 
         <div className="row">
-          <div className="col-md-9 mb-md-0 mb-5">
-            <form
-              id="contact-form"
-              name="contact-form"
-              action="mail.php"
-              method="POST"
-            >
+          <div className="col-md-9">
+            <form onSubmit={handleSubmit}>
+              
               <div className="row">
                 <div className="col-md-6">
-                  <div className="md-form mb-0">
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      className="form-control"
-                    />
-                    <label for="name" className="">
-                      Your name
-                    </label>
-                  </div>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Your name"
+                    required
+                  />
                 </div>
 
                 <div className="col-md-6">
-                  <div className="md-form mb-0">
-                    <input
-                      type="text"
-                      id="email"
-                      name="email"
-                      className="form-control"
-                    />
-                    <label for="email" className="">
-                      Your email
-                    </label>
-                  </div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="form-control"
+                    placeholder="Your email"
+                    required
+                  />
                 </div>
               </div>
 
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="md-form mb-0">
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      className="form-control"
-                    />
-                    <label for="subject" className="">
-                      Subject
-                    </label>
-                  </div>
-                </div>
+              <div className="mt-3">
+                <input
+                  type="text"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className="form-control"
+                  placeholder="Subject"
+                  required
+                />
               </div>
 
-              <div className="row">
-                <div className="col-md-12">
-                  <div className="md-form">
-                    <textarea
-                      type="text"
-                      id="message"
-                      name="message"
-                      rows="2"
-                      className="form-control md-textarea"
-                    ></textarea>
-                    <label for="message">Your message</label>
-                  </div>
-                </div>
+              <div className="mt-3">
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  className="form-control"
+                  rows="4"
+                  placeholder="Your message"
+                  required
+                ></textarea>
+              </div>
+
+              <div className="text-center mt-4">
+                <Button variant="outline-primary" type="submit">
+                  Submit
+                </Button>
               </div>
             </form>
-
-            <div className="text-center text-md-left">
-            <Button variant="outline-primary">Submit</Button>{' '}
-
-            </div>
-            <div className="status"></div>
           </div>
 
+          {/* Right side info */}
           <div className="col-md-3 text-center">
-            <ul className="list-unstyled mb-0">
+            <ul className="list-unstyled">
               <li>
                 <p>North India</p>
               </li>
 
               <li>
-                <img src={img4} width="20px" height="20px" alt="not-found" />
-                <p><a href="https://www.linkedin.com/in/pooja-srivastava-3789b1131/">Linkedin</a></p>
+                <img src={img4} width="20px" height="20px" alt="icon" />
+                <p>
+                  <a href="https://www.linkedin.com/">
+                    Linkedin
+                  </a>
+                </p>
               </li>
 
               <li>
-                <i className="fas fa-envelope mt-4 fa-2x"></i>
                 <p>devsri</p>
               </li>
             </ul>
