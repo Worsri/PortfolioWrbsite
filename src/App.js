@@ -4,8 +4,14 @@ import Home from './components/Home';
 import AboutUs from './components/AboutUs';
 import Contact from './components/Contact';
 import Projects from './components/Projects';
+import emailjs from "@emailjs/browser";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    emailjs.init("pQ29dOv61oMF9csFX");
+  }, []);
+
   return (
     <>
     <BrowserRouter>

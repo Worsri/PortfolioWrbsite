@@ -3,8 +3,6 @@ import Navbar from "./Navbar";
 import imagee from "./images/image2.gif";
 import Typed from "typed.js";
 import "./Home.css";
-
-import namimg from "./images/nambg.jpg";
 import SliderCard from "./SliderCard";
 
 function Home() {
